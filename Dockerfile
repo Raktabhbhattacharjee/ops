@@ -1,9 +1,23 @@
-# base image 
+# Use the official Node.js image as the base image
 FROM node
+
+# Set the working directory inside the container
+# All following commands will run from /app
 WORKDIR /app
-COPY index.js index.js
-COPY package.json  package.json
-COPY package-lock.json package-lock.json
-RUN npm install 
-# to run it 
-CMD [ "node", "index.js" ]
+
+# Copy only the dependency files first
+# Example: package.json and package-lock.json
+# Keeping this separate allows Docker to cache the npm install layer
+COPY package*.json .
+
+# Install all dependencies listed in package.json
+# This layer is reused from cache if the package files haven't changed
+RUN npm install
+
+# Copy the rest of the application into the container
+# Example: index.js, routes/, controllers/, etc.
+# If only application code changes, Docker can reuse the npm install layer
+COPY . .
+
+# Start the Node.js application when the container starts
+CMD ["node", "index.js"]
