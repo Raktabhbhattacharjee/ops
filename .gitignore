@@ -1,5 +1,21 @@
+# Dependencies
 node_modules/
+package-lock.json
+
+# Environment variables & secrets
 .env
+.env.*
+*.pem
+*.key
+
+# Data & Persistence volumes
+redis-data/
+postgres-data/
+mongo-data/
+
+# Logs & OS artifacts
 *.log
 .DS_Store
-dist/   
+dist/
+.idea/
+.vscode/
