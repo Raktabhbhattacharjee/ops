@@ -2,8 +2,13 @@ services:
   # container name 
   backend:
     build: ./backend
+    environment:
+      - PORT=7000
     ports:
-      - 8000:3000
+      - 8000:7000
+    env_file:
+      - ./backend/.env
+    
 
   frontend:
     build: ./frontend
