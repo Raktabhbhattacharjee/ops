@@ -1,0 +1,10 @@
+services:
+  # This service creates and runs the Redis server in a Docker container.
+  redis:
+    # Docker downloads this official Redis server image if it is not local.
+    image: redis:alpine
+    # This is the name Docker gives to our Redis server container.
+    container_name: redis_cache
+    # Expose Redis outside the container: local port 6379 -> container port 6379.
+    ports:
+      - "6379:6379"
